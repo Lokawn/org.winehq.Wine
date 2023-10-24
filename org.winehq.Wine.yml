@@ -477,6 +477,19 @@ modules:
             url: https://www.cabextract.org.uk/cabextract-1.9.1.tar.gz
             sha256: afc253673c8ef316b4d5c29cc4aa8445844bee14afffbe092ee9469405851ca7
 
+      - name: perl
+        sources:
+          - type: archive
+            url: https://www.cpan.org/src/5.0/perl-5.38.0.tar.xz
+            sha256: eca551caec3bc549a4e590c0015003790bdd1a604ffe19cc78ee631d51f7072e
+          - type: script
+            dest-filename: configure
+            commands:
+              - ./Configure -des -Dprefix=/app
+        post-install:
+          - find /app/lib/perl5 -type f -exec chmod u+w {} \;
+
+
   # Bundled extensions
 
   - name: wine-gecko
